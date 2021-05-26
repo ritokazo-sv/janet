@@ -1,0 +1,11 @@
+{
+    "prefix": "!",
+    "token": "{SEU_TOKEN}",
+    "YOUTUBE_API": "{SEU_TOKEN}",
+    "options": [
+        "**!play:** Digite !play nome da musica , para começar a tocar",
+        "**!playlist:** Comando para ver a Lista de Músicas",
+        "**!skip:** Pula para próxima música na lista",
+        "**!stop:** Desliga Janet"        
+    ]
+}
