@@ -1,4 +1,4 @@
-const { YOUTUBE_API } = require("../config.json");
+const YOUTUBE_API = process.env.YOUTUBE_API;
 const Discord = require("discord.js");
 const ytdl = require("ytdl-core");
 const search = require('youtube-search')
