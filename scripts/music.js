@@ -39,6 +39,7 @@ async function ysearch(message) {
             .setAuthor('Janet Disco', 'https://static.wikia.nocookie.net/thegoodplace/images/3/3c/6F0B9E9F-8412-4E4B-800E-E3BE42E50114.jpeg')
             .setDescription(titles.join("\n")) 
             .setTimestamp()
+            .setColor('7646FF')
             .setFooter(`Solicitado por ${message.author.username}`)
         
         message.channel.send(embed)
@@ -54,6 +55,7 @@ async function ysearch(message) {
             .setDescription(`${selected.description}`)
             .setThumbnail(`${selected.thumbnails.default.url}`)    
             .setTimestamp()
+            .setColor('7646FF')
             .setFooter(`Solicitado por ${message.author.username}`)    
         
         // Executa Função de Play
@@ -112,6 +114,7 @@ async function execute(message, serverQueue, music, embed) {
             .setDescription(`${song.description}`)
             .setThumbnail(`${song.thumb}`)    
             .setTimestamp()
+            .setColor('7646FF')
             .setFooter(`Solicitado por ${message.author.username}`)
     return message.channel.send(embed);
   }
@@ -183,6 +186,7 @@ function list(message) {
     .setTitle(`Músicas na Fila`)
     .setDescription(titles.join("\n"))  
     .setTimestamp()
+    .setColor('7646FF')
     .setFooter(`Solicitado por ${message.author.username}`)
 
     return  message.channel.send(embed);

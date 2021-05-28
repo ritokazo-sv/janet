@@ -55,8 +55,6 @@ module.exports = (commandOptions) => {
     commands = [commands]
   }
 
-  console.log(`Registering command "${commands[0]}"`)
-
   // Ensure the permissions are in an array and are all valid
   if (permissions.length) {
     if (typeof permissions === 'string') {
@@ -129,7 +127,7 @@ module.exports.listen = (client) => {
           arguments.length < minArgs ||
           (maxArgs !== null && arguments.length > maxArgs)
         ) {
-          message.reply(`Comando inválido ! Use ${prefix}${alias} ${expectedArgs}`);
+          message.reply(`Comando inválido ! Use ${prefix}${name.replace(prefix, '')} ${expectedArgs}`);
           return;
         }
 
