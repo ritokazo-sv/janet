@@ -16,7 +16,7 @@ module.exports = {
         const param = arguments.toString().replace(',', '+')
 
         // Busca Informações básicas do Player
-        const endpoint = `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${param}?api_key=${riot_token}3`
+        const endpoint = `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${param}?api_key=${riot_token}`
         let embed = new Discord.MessageEmbed()
 
         axios.get(endpoint)
