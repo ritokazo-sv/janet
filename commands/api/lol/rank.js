@@ -1,19 +1,32 @@
+require('dotenv').config();
 const axios = require("axios")
 const Discord = require("discord.js")
+const { winrate } = require("../../../scripts/riot") 
+const riot_token = process.env.RIOT_API
 
 module.exports = {
-    commands: ['cat', 'gato', 'sendcat'],
-    minArgs: 0,
-    maxArgs: 1,
-    description: "Exibe gatos aleatórios, utilize !sendcat <@username> para enviar para amigos na DM ",
+    commands: ['elo', 'rank', 'r'],
+    minArgs: 1,
+    maxArgs: 999,
+    expectedArgs: '<nome do jogador>',
+    description: "Exibe informações do elo do Player ",
     callback: (message, arguments, text, client) => {
-        const { guild, channel } = message
 
-        const user = message.mentions.users.first()
-        let dmuser = null 
-        if(user) {
-            dmuser = client.users.cache.get(user.id)
-        }
+        axios.get(`https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${arguments}?api_key=${riot_token}`)
+        .then((res) => {
+            const player = res.data
+        })
+        .catch((err) => { 
+            if(err.response) {
+                message.channel.send(`
+                > A API da Riot notificou um erro **${err.response.statusText}** com o código **${err.response.status}** 
+                \n > Estamos trabalhando para resolver isso.`) 
+            }            
+        })
+
+        console.log(player)
+
+        return
 
         axios.get('https://api.thecatapi.com/v1/images/search')
         .then((res) => {            
