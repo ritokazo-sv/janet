@@ -8,13 +8,14 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v1
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      - name: executing remote ssh commands using password
+        uses: ./
         with:
-          server: ${{secrets.SSH_HOST}}
+          host: ${{secrets.SSH_HOST}}
           username: ${{secrets.SSH_USERNAME}}
           password: ${{secrets.SSH_PASSWORD}}
-          server-dir: bot/
+          #port: ${{ secrets.PORT }}
+          script: whoami
