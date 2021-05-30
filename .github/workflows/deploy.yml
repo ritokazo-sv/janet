@@ -18,3 +18,6 @@ jobs:
             cd janet
             git pull origin main
             echo 'Deplyoment Done'
+            npm install
+            pm2 delete 0
+            pm2 start index.js
