@@ -2,20 +2,19 @@ name: Build and Deploy
 on:
   push:
     branches: [ main ]
-
+    
 jobs:
   deploy:
-    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: appleboy/ssh-action@master
-
-      - name: executing remote ssh commands using password
-        uses: ./
+      - name: Deploy NodeJS app
+        uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{secrets.SSH_HOST}}
           username: ${{secrets.SSH_USERNAME}}
           password: ${{secrets.SSH_PASSWORD}}
-          #port: ${{ secrets.PORT }}
-          script: whoami
+          
+          script: |
+            cd janet
+            git pull origin main
+            echo 'Deplyoment Done'
