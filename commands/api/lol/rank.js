@@ -28,7 +28,7 @@ module.exports = {
         .catch((err) => { 
             if(err.response) {
 
-                embed.setTitle(`Encontrei um erro`)
+                embed.setTitle(`Encontrei um erro!`)
                 embed.setAuthor(client.user.username, client.user.avatarURL())
                 embed.setImage('https://www.autostraddle.com/wp-content/uploads/2019/10/janet-feature.jpg')
                 embed.setColor('7646FF')
