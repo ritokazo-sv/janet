@@ -12,32 +12,63 @@ module.exports = {
     description: "Exibe informações do elo do Player ",
     callback: (message, arguments, text, client) => {
 
+        // Concatena Parametrons em String
         const param = arguments.toString().replace(',', '+')
-        const endpoint = `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${param}?api_key=${riot_token}`;
+
+        // Busca Informações básicas do Player
+        const endpoint = `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${param}?api_key=${riot_token}3`
         let embed = new Discord.MessageEmbed()
 
         axios.get(endpoint)
         .then((res) => {
             const player = res.data
-           
-            message.channel.send(`Consultando endpoint ${endpoint}...`).then( (resultMessage) => {
-                resultMessage.edit(`Endpoint consultado `)
-            })
+            const iconAuthor = `https://ddragon.leagueoflegends.com/cdn/11.10.1/img/profileicon/${player.profileIconId}.png`
+            const rankURL = `https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${player.id}?api_key=${riot_token}` 
 
+            embed.setTitle('VEJA SEU PERFIL NO OP.GG')
+            embed.setDescription('Você ainda não possui rank nessa season')
+            embed.setAuthor(player.name, iconAuthor)
+            embed.setThumbnail(iconAuthor)
+            embed.setColor('7646FF')
+            embed.setTimestamp()
+            embed.setURL(`https://br.op.gg/summoner/userName=${param}`)
+            embed.setFooter(`Solicitado por ${message.author.username}`)           
+
+            axios.get(rankURL).then((response) => {
+                
+                if(response.data.length > 0) {
+                    let desc = ''
+                    response.data.forEach((rank) => {
+                        desc += `\n\n **${rank.queueType}** \n`
+                        desc += `> ${rank.tier} ${rank.rank}`
+                        desc += `\n > ${rank.leaguePoints} PDL`
+                        desc += `\n > ${rank.wins}V ${rank.losses}D (${winrate(rank.wins, rank.losses)}%)`
+                    })
+
+                    embed.setDescription(desc)
+                }
+                
+                return message.channel.send(embed)
+
+            }).catch((err) => {
+                
+                console.log(err)
+                message.channel.send(embed)
+            })
         })
         .catch((err) => { 
             if(err.response) {
 
-                embed.setTitle(`Encontrei um erro!`)
+                embed.setTitle(`Encontrei um erro`)
                 embed.setAuthor(client.user.username, client.user.avatarURL())
-                embed.setImage('https://www.autostraddle.com/wp-content/uploads/2019/10/janet-feature.jpg')
+                embed.setImage('https://cdn.god182.com/wp-content/uploads/2021/05/janet-feature.jpg')
                 embed.setColor('7646FF')
                 embed.setTimestamp()
                 embed.setFooter(`Solicitado por ${message.author.username}`)
 
                 let msg_error = `
                     A API da Riot notificou um erro **${err.response.statusText}** com o código **${err.response.status}** 
-                    \n Estamos trabalhando para resolver isso.
+                    Estamos trabalhando para resolver isso.
                 `
 
                 if(err.response.status && err.response.status == 404) {
@@ -45,37 +76,8 @@ module.exports = {
                 }
 
                 embed.setDescription(msg_error)
-
                 message.channel.send(embed) 
             }            
-        })
-
-        return
-
-        axios.get('https://api.thecatapi.com/v1/images/search')
-        .then((res) => {            
-
-            // Envia mensagem Embed with image
-            embed = new Discord.MessageEmbed()
-            .setTitle(`Veja no seu Navegador`)
-            .setURL(`${res.data[0].url}`)
-            .setImage(`${res.data[0].url}`)
-            .setColor('7646FF')
-            .setTimestamp()
-            .setFooter(`Solicitado por ${message.author.username}`)
-
-            if(dmuser) {
-                embed.setDescription(`${message.author.username} te enviou esse pacote`)
-                embed.setFooter(`Enviado por ${message.author.username}`)
-                message.channel.send(`> Gato embalado e despachado para **${dmuser.username}**!`)
-                dmuser.send(embed)
-                return
-            }
-            
-            message.channel.send(embed)
-        })
-        .catch((err) => {
-            console.error('ERR:', err)
         })
     },
   }
