@@ -28,6 +28,7 @@ module.exports = {
             .setFooter(`Solicitado por ${message.author.username}`)
 
             if(dmuser) {
+                message.channel.send(`> Gato despachado e embalado para **${dmuser.username}**!`)
                 dmuser.send(embed)
                 return
             }
