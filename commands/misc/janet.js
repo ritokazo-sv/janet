@@ -1,19 +1,52 @@
 const Discord = require("discord.js")
+const moment = require('moment')
+const { formatDate } = require("../../scripts/custom")
 
 module.exports = {
-    commands: ['janet', 'j'],
+    commands: ['janet', 'j', 'botinfo'],
     minArgs: 0,
     maxArgs: 0,
-    description: "Saiba como adicionar a Janet no seu Servidor do Discord",
-    callback: (message, arguments, text) => {
+    description: "Informações sobre a Janet",
+    callback: (message, arguments, text, client) => {
+
+        const inline = true
+        const date = client.user.createdAt
+        const userName = client.user.username
+        const servsize = client.guilds.cache.size
+        const usersize = client.user.usersize
+        const status = {
+            online: '`🟢` Online',
+            offline: '`⚫` Offline'
+        }
+        let totalMembers = 0
+
+        for(const guild of client.guilds.cache) {
+            totalMembers += guild[1].memberCount
+        }
+
         embed = new Discord.MessageEmbed()
-        .setTitle(`Adicione a Janet no seu Servidor`)
-        .setDescription(`Utilize o link: \n https://discord.com/oauth2/authorize?=&client_id=846768664572723250&scope=bot&permissions=8`) 
+        .setTitle(`Olá eu sou a Janet`)
+        .setDescription(`Você pode conferir minhas funcionalidades digitando !help  \n\n [Adicione o Janet ao seu servidor](https://discord.com/oauth2/authorize?=&client_id=846768664572723250&scope=bot&permissions=8)`) 
         .setURL(`https://discord.com/oauth2/authorize?=&client_id=846768664572723250&scope=bot&permissions=8`)
-        .setImage('https://static.onecms.io/wp-content/uploads/sites/6/2018/12/nup_183523_0087-2000.jpg')
-        .setTimestamp()
+        .setAuthor(`${client.user.username}`, client.user.avatarURL())
         .setColor('7646FF')
-        .setFooter(`Solicitado por ${message.author.username}`)
+        .addField('**Meu nick**', userName)
+        .addField('**Meu ID**', client.user.id)
+        .addField('**Servidores**', `🛡 ${servsize}`, true)
+        .addField('**Usuários**', `${totalMembers}`, inline)
+        .addField('**Estou online a**', moment().to(client.startTime, true))
+        .addField('**Criado em**', formatDate('DD/MM/YYYY, às HH:mm:ss', date))
+        .addField('**Author**', '@godbr')
+        .setFooter(`2021 © ${client.user.username}.`)
+
+        if (client.user.presence.status) {
+            embed.addField(
+              '**Status**',
+              `${status[client.user.presence.status]}`,
+              inline,
+              true
+            )
+          }
 
         return message.channel.send(embed)
     },
