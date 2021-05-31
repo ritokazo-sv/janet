@@ -5,7 +5,7 @@ module.exports = {
     commands: ['cat', 'gato', 'sendcat'],
     minArgs: 0,
     maxArgs: 1,
-    description: "Exibe gatos aleatórios, utilize !sendcat <@username> para enviar para amigos na DM ",
+    description: "Exibe gatos aleatórios, utilize <prefix>sendcat <@username> para enviar para amigos na DM ",
     callback: (message, arguments, text, client) => {
         const { guild, channel } = message
 

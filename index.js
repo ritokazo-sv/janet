@@ -5,6 +5,7 @@ const client = new Discord.Client()
 const token = process.env.DISCORD_TOKEN
 const { status } = require("./scripts/music")
 const loadCommands = require('./commands/load-commands')
+const commandBase = require('./commands/command-base')
 
 client.on('ready', async () => {
 
@@ -13,7 +14,7 @@ client.on('ready', async () => {
   // Default Status
   status(client, ' the office no vazio')
 
-  // Carrega Todos Comandos
+  commandBase.loadPrefixes(client)
   loadCommands(client)
 
 })

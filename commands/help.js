@@ -1,14 +1,15 @@
 const loadCommands = require('./load-commands')
-const { prefix } = require('../config.json')
 const Discord = require("discord.js")
 
 module.exports =  {
     commands: ['help', 'h'],
     description: "Saiba todos os comandos da Janet",
     ignore: true,
-    callback: (message, arguments, text) => {
+    callback: (message, arguments, text, client, prefix) => {
         let reply = "Olá, eu sou a Janet, aqui estão meus comandos.\n \n";
         let helpers = false;
+
+        console.log(prefix)
 
         const commands = loadCommands()
 

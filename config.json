@@ -1,5 +1,5 @@
 {
-    "prefix": "!",
+    "prefix": "$",
     "options": [
         "**Comandos de Música**",
         "**!play:** Digite !play nome da musica , para começar a tocar",
@@ -9,5 +9,6 @@
         "\n **Comandos de Servidor**",
         "**!info:** Informações do Servidor",   
         "**!janet:** Saiba como adicionar a Janet em outro servidor!"  
-    ]
+    ],
+    "mongoPath": "mongodb://localhost:27017"
 }

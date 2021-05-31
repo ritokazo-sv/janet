@@ -1,4 +1,7 @@
-const { prefix } = require('../config.json')
+const mongo = require('../mongo')
+const commandPrefixSchema = require('../schemas/command.prefix-schema')
+const { prefix: globalPrefix } = require('../config.json')
+const guildPrefixes = {}
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
@@ -76,63 +79,86 @@ module.exports = (commandOptions) => {
 module.exports.listen = (client) => {
   // Listen for messages
   client.on('message', (message) => {
-    const { member, content, guild } = message;
     
-      // Split on any number of spaces
-      const arguments = content.split(/[ ]+/)
+    const { member, content, guild } = message;
+    const prefix = guildPrefixes[guild.id] || globalPrefix
+    
+    // Split on any number of spaces
+    const arguments = content.split(/[ ]+/)
 
-      // Remove the command which is the first index
-      const name = arguments.shift().toLowerCase();
+    // Remove the command which is the first index
+    const name = arguments.shift().toLowerCase();
 
-      if(name.startsWith(prefix)) {
-        const command = allCommands[name.replace(prefix, '')]
-        if (!command) {
+    if(name.startsWith(prefix)) {
+      const command = allCommands[name.replace(prefix, '')]
+      if (!command) {
+        return
+      }
+
+      const {
+        permissions,
+        permissionError = "Você não tem permissão para rodar esse comando.",
+        requiredRoles = [],
+        minArgs = 0,
+        maxArgs = null,
+        expectedArgs,
+        callback,
+      } = command;
+
+      // Ensure the user has the required permissions
+      for (const permission of permissions) {
+        if (!member.hasPermission(permission)) {
+          message.reply(permissionError)
           return
         }
-
-        const {
-          permissions,
-          permissionError = "Você não tem permissão para rodar esse comando.",
-          requiredRoles = [],
-          minArgs = 0,
-          maxArgs = null,
-          expectedArgs,
-          callback,
-        } = command;
-
-        // Ensure the user has the required permissions
-        for (const permission of permissions) {
-          if (!member.hasPermission(permission)) {
-            message.reply(permissionError)
-            return
-          }
-        }
-
-        // Ensure the user has the required roles
-        for (const requiredRole of requiredRoles) {
-          const role = guild.roles.cache.find(
-            (role) => role.name === requiredRole
-          )
-
-          if (!role || !member.roles.cache.has(role.id)) {
-            message.reply(
-              `Você precisa ter a permissão "${requiredRole}" para usar esse comando.`
-            )
-            return
-          }
-        }
-
-        // Ensure we have the correct number of arguments
-        if (
-          arguments.length < minArgs ||
-          (maxArgs !== null && arguments.length > maxArgs)
-        ) {
-          message.reply(`Comando inválido ! Use ${prefix}${name.replace(prefix, '')} ${expectedArgs}`);
-          return;
-        }
-
-        // Handle the custom command code
-        callback(message, arguments, arguments.join(' '), client);
       }
+
+      // Ensure the user has the required roles
+      for (const requiredRole of requiredRoles) {
+        const role = guild.roles.cache.find(
+          (role) => role.name === requiredRole
+        )
+
+        if (!role || !member.roles.cache.has(role.id)) {
+          message.reply(
+            `Você precisa ter a permissão "${requiredRole}" para usar esse comando.`
+          )
+          return
+        }
+      }
+
+      // Ensure we have the correct number of arguments
+      if (
+        arguments.length < minArgs ||
+        (maxArgs !== null && arguments.length > maxArgs)
+      ) {
+        message.reply(`Comando inválido ! Use ${prefix}${name.replace(prefix, '')} ${expectedArgs}`);
+        return;
+      }
+
+      // Handle the custom command code
+      callback(message, arguments, arguments.join(' '), client, prefix);
+    }
   })
+}
+
+module.exports.updateCache = (guildId, newPrefix) => {
+  guildPrefixes[guildId] = newPrefix
+}
+
+module.exports.loadPrefixes = async (client) => {
+  await mongo().then(async mongoose => {
+    try {
+      for (const guild of client.guilds.cache) {
+        const guildId = guild[1].id
+        const result = await commandPrefixSchema.findOne({ _id: guildId })
+        if(result) {
+          guildPrefixes[guildId] = result.prefix
+        }        
+      }
+    }finally {
+      mongoose.connection.close()
+    }
+  })
+  
 }

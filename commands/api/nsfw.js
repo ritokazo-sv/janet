@@ -7,7 +7,7 @@ module.exports = {
     minArgs: 0,
     maxArgs: 1,
     ignore: true,
-    description: "Tê dá NSFW pic randoms, ou envie para um amigo usando !sendnsfw",
+    description: "Tê dá NSFW pic randoms, ou envie para um amigo usando <prefix>sendnsfw",
     callback: async (message, arguments, text, client) => {
 
         const reddit = ['cumsluts', 'LegalTeens', 'PetiteGoneWild', 'AsiansGoneWild', 'CollegeSluts', 'curvy', 'BigBoobsGW']

@@ -7,7 +7,7 @@ module.exports = {
     minArgs: 0,
     maxArgs: 0,
     description: "Informações sobre a Janet",
-    callback: (message, arguments, text, client) => {
+    callback: (message, arguments, text, client, prefix) => {
 
         const inline = true
         const date = client.user.createdAt
@@ -26,7 +26,7 @@ module.exports = {
 
         embed = new Discord.MessageEmbed()
         .setTitle(`Olá eu sou a Janet`)
-        .setDescription(`Você pode conferir minhas funcionalidades digitando !help  \n\n [Adicione o Janet ao seu servidor](https://discord.com/oauth2/authorize?=&client_id=846768664572723250&scope=bot&permissions=8)`) 
+        .setDescription(`Você pode conferir minhas funcionalidades digitando **${prefix}help**  \n\n [Adicione o Janet ao seu servidor](https://discord.com/oauth2/authorize?=&client_id=846768664572723250&scope=bot&permissions=8)`) 
         .setURL(`https://discord.com/oauth2/authorize?=&client_id=846768664572723250&scope=bot&permissions=8`)
         .setAuthor(`${client.user.username}`, client.user.avatarURL())
         .setColor('7646FF')

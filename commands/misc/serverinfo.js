@@ -5,7 +5,7 @@ module.exports = {
     minArgs: 0,
     maxArgs: 0,
     description: "Veja informações do seu servidor no Discord",
-    callback: (message, arguments, text, client) => {
+    callback: (message, arguments, text, client, prefix) => {
         
         client.guilds.cache.forEach((guild) => {
 
@@ -15,7 +15,7 @@ module.exports = {
       
               embed = new Discord.MessageEmbed()
               .setTitle(`${guild.name}`)
-              .setDescription(`Tem o total de ${guild.memberCount} membros`) 
+              .setDescription(`A Janet utiliza o **prefixo ${prefix}**`)
               .addFields(
                 {
                   name: 'Região',

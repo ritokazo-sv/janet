@@ -6,7 +6,7 @@ module.exports = {
     commands: ['meme', 'sendmeme', 'memes'],
     minArgs: 0,
     maxArgs: 1,
-    description: "Tê dá um meme aleatório, ou envia para um amigo usando !sendmeme",
+    description: "Tê dá um meme aleatório, ou envia para um amigo usando <prefix>sendmeme",
     callback: async (message, arguments, text, client) => {
 
         const reddit = ['cellbits', 'meme', 'dankmeme']

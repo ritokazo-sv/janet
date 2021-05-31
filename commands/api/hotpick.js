@@ -7,7 +7,7 @@ module.exports = {
     minArgs: 0,
     maxArgs: 1,
     ignore: true,
-    description: "Tê dá uma sex pic random, ou envie para um amigo usando !sendhot",
+    description: "Tê dá uma sex pic random, ou envie para um amigo usando <prefix>sendhot",
     callback: async (message, arguments, text, client) => {
 
         const reddit = ['CelebsBR', 'Celebs']
