@@ -11,9 +11,14 @@ module.exports = {
 
         const reddit = ['cellbits', 'meme', 'dankmeme']
         const randreddit = reddit[Math.floor(Math.random() * reddit.length)]
-        console.log(randreddit)
         const end = `https://www.reddit.com/r/${randreddit}.json?limit=100&?sort=top&t=all`
         const endpoint = fetch(end)
+
+        const user = message.mentions.users.first()
+        let dmuser = null 
+        if(user) {
+            dmuser = client.users.cache.get(user.id)
+        }
 
         endpoint.then(res => res.json())
         .then(json => 
@@ -32,6 +37,14 @@ module.exports = {
                 .setColor('7646FF')
                 .setTimestamp()
                 .setFooter(`Solicitado por ${message.author.username}`)
+
+                if(dmuser) {
+                    embed.setDescription(`${message.author.username} te enviou esse meme`)
+                    embed.setFooter(`Enviado por ${message.author.username}`)
+                    message.channel.send(`> Meme preparado e enviado para **${dmuser.username}**!`)
+                    dmuser.send(embed)
+                    return
+                }
 
                 return message.channel.send(embed)
             }
