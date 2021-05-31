@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 
 
 module.exports = {
-    commands: ['meme', 'sendmeme', 'mama'],
+    commands: ['meme', 'sendmeme', 'memes'],
     minArgs: 0,
     maxArgs: 1,
     description: "Tê dá um meme aleatório, ou envia para um amigo usando !sendmeme",
