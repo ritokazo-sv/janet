@@ -1,7 +1,11 @@
 const mongo = require('../mongo')
-const commandPrefixSchema = require('../schemas/command.prefix-schema')
+const Discord = require('discord.js')
 const { prefix: globalPrefix } = require('../config.json')
 const guildPrefixes = {}
+
+// Per server config
+const commandPrefixSchema = require('../schemas/command.prefix-schema')
+const leveling = require('../server/level')
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
@@ -77,9 +81,13 @@ module.exports = (commandOptions) => {
 }
 
 module.exports.listen = (client) => {
+
+  // Per server Functions
+  leveling(client)
+
   // Listen for messages
   client.on('message', (message) => {
-    
+
     const { member, content, guild } = message;
     const prefix = guildPrefixes[guild.id] || globalPrefix
     
@@ -132,7 +140,16 @@ module.exports.listen = (client) => {
         arguments.length < minArgs ||
         (maxArgs !== null && arguments.length > maxArgs)
       ) {
-        message.reply(`Comando inválido ! Use ${prefix}${name.replace(prefix, '')} ${expectedArgs}`);
+
+        // Set Embed response
+        embed = new Discord.MessageEmbed()
+        .setTitle(`Comando inválido`)
+        .setDescription(`Use ${prefix}${name.replace(prefix, '')} ${expectedArgs}`)
+        .setAuthor(`${client.user.username}`, client.user.avatarURL())
+        .setColor('RANDOM')
+        .setTimestamp()
+
+        message.channel.send(embed)
         return;
       }
 
