@@ -9,6 +9,7 @@ module.exports = async (client) => {
     client.on('message', async message => {
         
         if(message.author.bot) return;
+        const { guild, member } = message
 
         await mongo().then(async mongoose => {
             try {
@@ -22,8 +23,6 @@ module.exports = async (client) => {
                 mongoose.connection.close()
             }
         })
-
-        const { guild, member } = message
 
         messageCount(guild.id, member.id)
     })
