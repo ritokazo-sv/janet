@@ -12,13 +12,12 @@ module.exports = async (client) => {
 
         await mongo().then(async mongoose => {
             try {
-                for (const guild of client.guilds.cache) {
-                    const guildId = guild[1].id
-                    const result = await serverSchema.findOne({ guildId: guildId })
-                    if(result) {
-                        isleveling = result.leveling
-                    } 
-                }
+                const result = await serverSchema.findOne({ guildId: guildId })
+                if(result) {
+                    addXp(guild.id, member.id, 15, message)
+                    return
+                } 
+
             }finally {
                 mongoose.connection.close()
             }
@@ -26,13 +25,7 @@ module.exports = async (client) => {
 
         const { guild, member } = message
 
-        if(isleveling) {            
-            addXp(guild.id, member.id, 15, message)
-            return
-        }
-
         messageCount(guild.id, member.id)
-        console.log('HERE')
     })
 
 }
