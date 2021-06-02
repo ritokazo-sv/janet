@@ -17,11 +17,12 @@ module.exports = async (client) => {
                 console.log(result)
                 if(result.leveling) {
                     addXp(guild.id, member.id, 15, message)
+                    console.log('Xp Adicionado')
                     return
                 } 
 
             }finally {
-                mongoose.connection.close()
+                //mongoose.connection.close()
             }
         })
 
