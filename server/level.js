@@ -13,8 +13,14 @@ module.exports = async (client) => {
 
         await mongo().then(async mongoose => {
             try {
-                await serverSchema.findOne({ guildId: guild.id })
-            } finally {
+                const result = await serverSchema.findOne({ guildId: guild.id })
+                console.log(result)
+                if(result.leveling) {
+                    addXp(guild.id, member.id, 15, message)
+                    return
+                } 
+
+            }finally {
                 mongoose.connection.close()
             }
         })
