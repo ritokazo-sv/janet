@@ -2,7 +2,6 @@ const mongo = require('../mongo')
 const Discord = require('discord.js')
 const profileSchema = require('../schemas/profile-schema')
 const serverSchema = require('../schemas/server-schema')
-let isleveling = true
 
 module.exports = async (client) => {
 
@@ -14,7 +13,6 @@ module.exports = async (client) => {
         await mongo().then(async mongoose => {
             try {
                 const result = await serverSchema.findOne({ guildId: guild.id })
-                console.log(result)
                 if(result.leveling) {
                     addXp(guild.id, member.id, 15, message)
                     console.log('Xp Adicionado')
@@ -102,8 +100,6 @@ const messageCount = async (guildId, userId) => {
                 upsert: true,
                 new: true
             })
-
-            console.log(result)
 
         } finally {
             mongoose.connection.close()
