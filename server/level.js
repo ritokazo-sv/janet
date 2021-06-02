@@ -14,6 +14,8 @@ module.exports = async (client) => {
         await mongo().then(async mongoose => {
             try {
                 await serverSchema.findOne({ guildId: guild.id })
+            } finally {
+                mongoose.connection.close()
             }
         })
 
