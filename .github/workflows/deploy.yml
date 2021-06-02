@@ -16,7 +16,6 @@ jobs:
           
           script: |
             cd janet
-            git stash
             git pull origin main
             echo 'Deplyoment Done'
             npm install
