@@ -10,9 +10,9 @@ module.exports = {
     description: "Tê dá uma sex pic random, ou envie para um amigo usando <prefix>sendhot",
     callback: async (message, arguments, text, client) => {
 
-        const reddit = ['CelebsBR', 'Celebs']
+        const reddit = ['FamosasGostosas']
         const randreddit = reddit[Math.floor(Math.random() * reddit.length)]
-        const end = `https://www.reddit.com/r/${randreddit}.json?limit=100&?sort=top&t=all`
+        const end = `https://www.reddit.com/r/${randreddit}.json?limit=1000&?sort=top&t=all`
         const endpoint = fetch(end)
 
         const user = message.mentions.users.first()
@@ -23,7 +23,7 @@ module.exports = {
 
         endpoint.then(res => res.json())
         .then(json => 
-            json.data.children.filter(v => v.data.url.includes('png') || v.data.url.includes('jpg') || v.data.url.includes('jpeg') ||  v.data.url.includes('gif')) 
+            json.data.children.filter(v => v.data.url.includes('png') || v.data.url.includes('jpg') || v.data.url.includes('jpeg')) 
         )
         .then((urls) => {
             console.log(urls.length)

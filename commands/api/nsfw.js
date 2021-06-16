@@ -12,7 +12,7 @@ module.exports = {
 
         const reddit = ['cumsluts', 'LegalTeens', 'PetiteGoneWild', 'AsiansGoneWild', 'CollegeSluts', 'curvy', 'BigBoobsGW']
         const randreddit = reddit[Math.floor(Math.random() * reddit.length)]
-        const end = `https://www.reddit.com/r/${randreddit}.json?limit=100&?sort=top&t=all`
+        const end = `https://www.reddit.com/r/${randreddit}.json?limit=1000&?sort=top&t=all`
         const endpoint = fetch(end)
 
         console.log(randreddit)
@@ -25,7 +25,7 @@ module.exports = {
 
         endpoint.then(res => res.json())
         .then(json => 
-            json.data.children.filter(v => v.data.url.includes('png') || v.data.url.includes('jpg') || v.data.url.includes('jpeg') ||  v.data.url.includes('gif')) 
+            json.data.children.filter(v => v.data.url.includes('png') || v.data.url.includes('jpg') || v.data.url.includes('jpeg')) 
         )
         .then((urls) => {
             console.log(urls.length)

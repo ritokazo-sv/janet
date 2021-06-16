@@ -18,7 +18,7 @@ module.exports = {
                 .setFooter(`2021 © ${client.user.username}.`)
                 .setColor('RANDOM')
 
-                if(result) {
+                if(result) { 
 
                     let i = 1
                     for ( const list of result ) {
