@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 
 
 module.exports = {
-    commands: ['nsfw', 'sendnsfw'],
+    commands: ['nsfw'],
     minArgs: 0,
     maxArgs: 1,
     ignore: true,
