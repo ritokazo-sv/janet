@@ -9,7 +9,7 @@ module.exports = {
     description: "Tê dá um meme aleatório, ou envia para um amigo usando <prefix>sendmeme",
     callback: async (message, arguments, text, client) => {
 
-        const reddit = ['cellbits', 'meme', 'dankmeme']
+        const reddit = ['MemesBrasil', 'brasil', 'eu_nvr']
         const randreddit = reddit[Math.floor(Math.random() * reddit.length)]
         const end = `https://www.reddit.com/r/${randreddit}.json?limit=1000&?sort=top&t=all`
         const endpoint = fetch(end)
