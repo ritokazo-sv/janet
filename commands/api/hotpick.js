@@ -10,7 +10,7 @@ module.exports = {
     description: "Tê dá uma sex pic random, ou envie para um amigo usando <prefix>sendhot",
     callback: async (message, arguments, text, client) => {
 
-        const reddit = ['FamosasGostosas']
+        const reddit = ['FamosasGostosas', 'OnlyFans101']
         const randreddit = reddit[Math.floor(Math.random() * reddit.length)]
         const end = `https://www.reddit.com/r/${randreddit}.json?limit=1000&?sort=top&t=all`
         const endpoint = fetch(end)
