@@ -13,7 +13,7 @@ module.exports = {
     callback: (message, arguments, text, client) => {
 
         // Concatena Parametrons em String
-        const param = arguments.toString().replace(',', '+')
+        let param = arguments.toString().split(',').join('+')
 
         // Busca Informações básicas do Player
         const endpoint = `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${param}?api_key=${riot_token}`
@@ -25,7 +25,7 @@ module.exports = {
             const iconAuthor = `https://ddragon.leagueoflegends.com/cdn/11.10.1/img/profileicon/${player.profileIconId}.png`
             const rankURL = `https://br1.api.riotgames.com/lol/league/v4/entries/by-summoner/${player.id}?api_key=${riot_token}` 
 
-            embed.setTitle('VEJA SEU PERFIL NO OP.GG')
+            embed.setTitle('PERFIL NO OP.GG')
             embed.setDescription('Você ainda não possui rank nessa season')
             embed.setAuthor(player.name, iconAuthor)
             embed.setThumbnail(iconAuthor)
