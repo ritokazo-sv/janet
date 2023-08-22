@@ -30,8 +30,8 @@ module.exports = {
                 console.log(response)
 
                 // Directly extract the "message", "answer", and "humor" values from the response
-                const jsonResponse = JSON.parse(response.data.url)
-        
+                const jsonResponse = JSON.parse(response.data.data[0].url)
+                
                 return {
                     image: jsonResponse,
                 };
@@ -39,8 +39,6 @@ module.exports = {
                 console.error("Error calling the API:", error);
             }
         }
-
-        console.log(message.author)
 
         // Test the function
         getGptResponse(message).then(response => {
