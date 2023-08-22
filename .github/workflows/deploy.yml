@@ -15,8 +15,9 @@ jobs:
           password: ${{secrets.SSH_PASSWORD}}
           
           script: |
-            cd janet
-            git pull origin main
+            rm -r janet
+            wget https://github.com/richarditokazo/janet/archive/refs/heads/main.zip
+            unzip main.zip
             echo 'Deployment Done'
             npm install
             pm2 delete 0
