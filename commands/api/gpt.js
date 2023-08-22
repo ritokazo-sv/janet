@@ -9,7 +9,7 @@ module.exports = {
         const axios = require('axios')
 
         const API_ENDPOINT = 'https://api.openai.com/v1/completions';
-        const BEARER_TOKEN = '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';
+        const BEARER_TOKEN = process.env.GPT;
 
         async function getGptResponse(message) {
             const payload = {
