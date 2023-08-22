@@ -15,10 +15,11 @@ jobs:
           password: ${{secrets.SSH_PASSWORD}}
           
           script: |
-            rm -r janet
+            rm -r janet-main
             wget https://github.com/richarditokazo/janet/archive/refs/heads/main.zip
-            unzip janet-main.zip
+            unzip main.zip
             echo 'Deployment Done'
             npm install
             pm2 delete 0
             pm2 start index.js
+            rm main.zip
