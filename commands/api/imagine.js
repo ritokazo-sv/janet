@@ -14,11 +14,11 @@ module.exports = {
 
         async function getGptResponse(message) {
             const payload = {
-                "prompt": message,
+                "prompt": message.content.substring(9),
                 "n": 1,
                 "size": "512x512"
             };
-        
+            
             const headers = {
                 'Authorization': `Bearer ${BEARER_TOKEN}`,
                 'Content-Type': 'application/json',
@@ -26,15 +26,8 @@ module.exports = {
         
             try {
                 const response = await axios.post(API_ENDPOINT, payload, { headers: headers });
-                
-                console.log(response)
 
-                // Directly extract the "message", "answer", and "humor" values from the response
-                const jsonResponse = JSON.parse(response.data.data[0].url)
-                
-                return {
-                    image: jsonResponse,
-                };
+                return response.data.data[0].url
             } catch (error) {
                 console.error("Error calling the API:", error);
             }
@@ -42,14 +35,15 @@ module.exports = {
 
         // Test the function
         getGptResponse(message).then(response => {
+
             embed = new Discord.MessageEmbed()
             .setTitle(`Você imaginou:`)
-            .setURL(`${response.image}`)
-            .setImage(`${response.image}`)
+            .setURL(`${response}`)
+            .setImage(`${response}`)
             .setColor('random')
             .setTimestamp()
             .setFooter(`Solicitado por ${message.author.username}`)
-
+            
             return message.channel.send(embed)
         });
     },
