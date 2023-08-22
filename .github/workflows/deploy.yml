@@ -18,9 +18,9 @@ jobs:
             rm -r janet-main
             wget https://github.com/richarditokazo/janet/archive/refs/heads/main.zip
             unzip main.zip
-            cp .env janet-main/
-            echo 'Deployment Done'
-            npm install
+            cp .env janet-main/            
+            cd janet-main && npm install
             pm2 delete 0
             pm2 start index.js
             rm main.zip
+            echo 'Deployment Done'
