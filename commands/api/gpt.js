@@ -47,8 +47,6 @@ module.exports = {
             }
         }
 
-        console.log(message.author)
-
         // Test the function
         getGptResponse(message).then(response => {
             embed = new Discord.MessageEmbed()
