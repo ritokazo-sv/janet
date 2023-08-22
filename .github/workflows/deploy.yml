@@ -17,7 +17,7 @@ jobs:
           script: |
             rm -r janet
             wget https://github.com/richarditokazo/janet/archive/refs/heads/main.zip
-            unzip main.zip
+            unzip janet-main.zip
             echo 'Deployment Done'
             npm install
             pm2 delete 0
