@@ -9,12 +9,12 @@ module.exports = {
         const axios = require('axios')
 
         const API_ENDPOINT = 'https://api.openai.com/v1/completions';
-        const BEARER_TOKEN = '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';
+        const BEARER_TOKEN = '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';
 
         async function getGptResponse(message) {
             const payload = {
                 model: "text-davinci-003",
-                prompt: `Retorne o prompt '${message}' somente em JSON separado por chave message e humor e com sua resposta em answer`,
+                prompt: `Retorne o prompt '${message}' somente em JSON separado por chave message e humor e com sua resposta em answer e formate a resposta em markdown`,
                 temperature: 0.3,
                 max_tokens: 300,
                 top_p: 1,
