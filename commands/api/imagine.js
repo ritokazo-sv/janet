@@ -27,6 +27,8 @@ module.exports = {
             try {
                 const response = await axios.post(API_ENDPOINT, payload, { headers: headers });
                 
+                console.log(response)
+
                 // Directly extract the "message", "answer", and "humor" values from the response
                 const jsonResponse = JSON.parse(response.data.url)
         
