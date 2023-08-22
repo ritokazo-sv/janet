@@ -1,20 +1,15 @@
 const Discord = require('discord.js')
-const fetch = require("node-fetch");
-
 
 module.exports = {
     commands: ['gpt'],
-    expectedArgs: '<prompt>',
-    minArgs: 0,
-    maxArgs: 1,
     description: "Integração de testes com o chat GPT",
 
     callback: async (message, arguments, text, client) => {
 
-        const axios = require('axios');
+        const axios = require('axios')
 
         const API_ENDPOINT = 'https://api.openai.com/v1/completions';
-        const BEARER_TOKEN = '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';
+        const BEARER_TOKEN = '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';
 
         async function getGptResponse(message) {
             const payload = {
@@ -51,15 +46,15 @@ module.exports = {
             }
         }
 
+        console.log(message.author)
+
         // Test the function
         getGptResponse(message).then(response => {
-            console.log(response)
-
             embed = new Discord.MessageEmbed()
             .setTitle(`Segundo a Janet ...`)
-            .setColor('7646FF')
+            .setColor('random')
             .setTimestamp()
-            .setDescription(response.answer + ' \n Seu humor parecia estar ' + response.humor)
+            .setDescription(response.answer + ' \n')
             .setFooter(`Solicitado por ${message.author.username}`)
 
             return message.channel.send(embed)
