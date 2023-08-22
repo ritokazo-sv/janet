@@ -17,7 +17,7 @@ jobs:
           script: |
             cd janet
             git pull origin main
-            echo 'Deplyoment Done'
+            echo 'Deployment Done'
             npm install
             pm2 delete 0
             pm2 start index.js
