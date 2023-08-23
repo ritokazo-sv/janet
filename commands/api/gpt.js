@@ -9,7 +9,7 @@ module.exports = {
 
         const axios = require('axios')
 
-        const API_ENDPOINT = 'https://api.openai.com/v1/completions';
+        const API_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
         const BEARER_TOKEN = process.env.GPT;
 
         async function getGptResponse(message) {
@@ -18,7 +18,7 @@ module.exports = {
                 messages: [
                     {
                         role: "system",
-                        content: "Você sempre vai retornar somente um JSON separado pelas chaves message, humor e answer com a reposta em markdown",
+                        content: "Você sempre responderá qualquer pergunta com o melhor da sua experiência, e formatará as resposta em markdown",
                     },
                     {
                         role: "user",
@@ -34,18 +34,9 @@ module.exports = {
         
             try {
                 const response = await axios.post(API_ENDPOINT, payload, { headers: headers });
+
+                return response.data.choices[0].message.content
                 
-                // Directly extract the "message", "answer", and "humor" values from the response
-                const jsonResponse = JSON.parse(response.data.choices[0].text.trim())
-                const message = jsonResponse.message
-                const answer = jsonResponse.answer
-                const humor = jsonResponse.humor
-        
-                return {
-                    message: message,
-                    answer: answer,
-                    humor: humor
-                };
             } catch (error) {
                 console.error("Error calling the API:", error);
             }
@@ -53,13 +44,14 @@ module.exports = {
 
         // Test the function
         getGptResponse(message).then(response => {
+
             embed = new Discord.MessageEmbed()
             .setTitle(`Segundo a Janet ...`)
             .setColor('random')
             .setTimestamp()
-            .setDescription(response.answer + ' \n')
+            .setDescription(response + ' \n')
             .setFooter(`Solicitado por ${message.author.username}`)
-
+            
             return message.channel.send(embed)
         });
     },
