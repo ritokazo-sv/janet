@@ -15,7 +15,7 @@ module.exports = {
         async function getGptResponse(message) {
             const payload = {
                 model: "text-davinci-003",
-                prompt: `Retorne o prompt '${message}' somente em JSON separado por chave message e humor e com sua resposta em answer e formate a resposta em markdown`,
+                prompt: `Retorne o prompt '${message.content.substring(5)}' somente em JSON separado por chave message e humor e com sua resposta em answer e formate a resposta em markdown`,
                 temperature: 0.3,
                 max_tokens: 300,
                 top_p: 1,
