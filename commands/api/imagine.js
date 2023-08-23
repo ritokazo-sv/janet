@@ -34,17 +34,20 @@ module.exports = {
         }
 
         // Test the function
-        getGptResponse(message).then(response => {
+        message.reply('Estou gerando a sua imagem ...').then( (resultMessage) => {
+            getGptResponse(message).then(response => {
 
-            embed = new Discord.MessageEmbed()
-            .setTitle(`Você imaginou:`)
-            .setURL(`${response}`)
-            .setImage(`${response}`)
-            .setColor('random')
-            .setTimestamp()
-            .setFooter(`Solicitado por ${message.author.username}`)
-            
-            return message.channel.send(embed)
-        });
+                embed = new Discord.MessageEmbed()
+                .setTitle(`Você imaginou:`)
+                .setURL(`${response}`)
+                .setImage(`${response}`)
+                .setColor('random')
+                .setTimestamp()
+                .setFooter(`Solicitado por ${message.author.username}`)
+                
+                resultMessage.edit('Sua imagem foi gerada com sucesso!')
+                resultMessage.edit(embed)
+            });
+        })
     },
   }
