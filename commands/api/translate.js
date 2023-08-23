@@ -2,8 +2,8 @@ require('dotenv').config();
 const Discord = require('discord.js')
 
 module.exports = {
-    commands: ['gpt'],
-    description: "Integração de testes com o chat GPT",
+    commands: ['translate'],
+    description: "Traduza palavras ou textos do inglês para o português",
 
     callback: async (message, arguments, text, client) => {
 
@@ -18,11 +18,11 @@ module.exports = {
                 messages: [
                     {
                         role: "system",
-                        content: "Você sempre responderá qualquer pergunta com o melhor da sua experiência, e formatará as resposta em markdown",
+                        content: "You will be provided with a sentence in English, and your task is to translate it into Brazilian Portugues e você sempre responderá qualquer pergunta com o melhor da sua experiência, e formatará as resposta em markdown",
                     },
                     {
                         role: "user",
-                        content: message.content.substring(5),
+                        content: message.content.substring(11),
                     }
                 ],
             };
@@ -43,7 +43,7 @@ module.exports = {
         }
 
         // Test the function
-        message.reply('Estou consultando ...').then( (resultMessage) => {
+        message.reply('Consultando o Duolingo ...').then( (resultMessage) => {
             getGptResponse(message).then(response => {
 
                 embed = new Discord.MessageEmbed()
@@ -53,7 +53,7 @@ module.exports = {
                 .setDescription(response + ' \n')
                 .setFooter(`Solicitado por ${message.author.username}`)
                 
-                resultMessage.edit('Sua consulta foi gerada!')
+                resultMessage.edit('Sentença traduzida!')
                 resultMessage.edit(embed)
             })
         })

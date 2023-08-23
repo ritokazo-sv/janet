@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 
 module.exports = {
     commands: ['code'],
-    description: "Integração de testes com o chat GPT",
+    description: "Analisador de código",
 
     callback: async (message, arguments, text, client) => {
 
