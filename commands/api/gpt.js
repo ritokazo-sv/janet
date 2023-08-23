@@ -43,16 +43,19 @@ module.exports = {
         }
 
         // Test the function
-        getGptResponse(message).then(response => {
+        message.reply('Estou consultando ...').then( (resultMessage) => {
+            getGptResponse(message).then(response => {
 
-            embed = new Discord.MessageEmbed()
-            .setTitle(`Segundo a Janet ...`)
-            .setColor('random')
-            .setTimestamp()
-            .setDescription(response + ' \n')
-            .setFooter(`Solicitado por ${message.author.username}`)
-            
-            return message.channel.send(embed)
-        });
+                embed = new Discord.MessageEmbed()
+                .setTitle(`Segundo a Janet ...`)
+                .setColor('random')
+                .setTimestamp()
+                .setDescription(response + ' \n')
+                .setFooter(`Solicitado por ${message.author.username}`)
+                
+                resultMessage.edit('Sua consulta foi gerada!')
+                resultMessage.edit(embed)
+            })
+    }   )
     },
   }

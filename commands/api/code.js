@@ -18,7 +18,7 @@ module.exports = {
                 messages: [
                     {
                         role: "system",
-                        content: "You will be provided with a piece of any code, and your task is to provide ideas for efficiency improvements and you will always format your answer with markdown.",
+                        content: "You will be provided with a piece of any code, and your task is to provide ideas for efficiency improvements and you will always format your answer with markdown and you need always to reply in Brazilian Portuguese.",
                     },
                     {
                         role: "user",
@@ -43,16 +43,19 @@ module.exports = {
         }
 
         // Test the function
-        getGptResponse(message).then(response => {
+        message.reply('Analisando seu código ...').then( (resultMessage) => {
+            getGptResponse(message).then(response => {
 
-            embed = new Discord.MessageEmbed()
-            .setTitle(`Segundo a Janet ...`)
-            .setColor('random')
-            .setTimestamp()
-            .setDescription(response + ' \n')
-            .setFooter(`Solicitado por ${message.author.username}`)
-            
-            return message.channel.send(embed)
-        });
+                embed = new Discord.MessageEmbed()
+                .setTitle(`Segundo a Janet ...`)
+                .setColor('random')
+                .setTimestamp()
+                .setDescription(response + ' \n')
+                .setFooter(`Solicitado por ${message.author.username}`)
+                
+                resultMessage.edit('Sua análise foi gerada!')
+                resultMessage.edit(embed)
+            })
+        })
     },
   }
