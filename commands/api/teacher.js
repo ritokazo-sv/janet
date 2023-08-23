@@ -56,7 +56,7 @@ module.exports = {
         }
 
         // Test the function
-        message.reply('Analisando seu código ...').then( (resultMessage) => {
+        message.reply('Abrindo a barça ...').then( (resultMessage) => {
             getGptResponse(message).then(response => {
 
                 embed = new Discord.MessageEmbed()
