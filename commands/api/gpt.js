@@ -14,13 +14,17 @@ module.exports = {
 
         async function getGptResponse(message) {
             const payload = {
-                model: "text-davinci-003",
-                prompt: `Retorne o prompt '${message.content.substring(5)}' somente em JSON separado por chave message e humor e com sua resposta em answer e formate a resposta em markdown`,
-                temperature: 0.3,
-                max_tokens: 300,
-                top_p: 1,
-                frequency_penalty: 0,
-                presence_penalty: 0
+                model: "gpt-3.5-turbo",
+                messages: [
+                    {
+                        role: "system",
+                        content: "Você sempre vai retornar somente um JSON separado pelas chaves message, humor e answer com a reposta em markdown",
+                    },
+                    {
+                        role: "user",
+                        content: message.content.substring(5),
+                    }
+                ],
             };
         
             const headers = {
