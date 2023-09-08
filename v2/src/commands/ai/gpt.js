@@ -143,6 +143,9 @@ module.exports = {
         // if dm is choosed
         if(user) {
             const response = new EmbedBuilder().setTitle('Encaminhado para DM');
+            if(user.user.id !== interaction.user.id) {
+                response.setDescription(`Mensagem enviada para ${user.user.globalName}`);
+            }
             response.setFooter({ text: `Solicitado por ${interaction.user.globalName}`, iconURL: interaction.user.avatarURL() }).setTimestamp();
 
             // Embed Changes
