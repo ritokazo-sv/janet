@@ -147,7 +147,7 @@ module.exports = {
 
             // Embed Changes
             const answer = hide ? '**' + user.user.globalName + ':** ```' + message + '```' : `Mensagem enviada por ${interaction.user.globalName} `;
-            embed.setDescription(`${answer} \n **Janet respondeu:** \n ${responseGPT}`);
+            embed.setDescription(`${answer} \n\n **Janet respondeu:** \n ${responseGPT} \n\n`);
             
             // reply dm and update message on channel
             user.send({embeds: [embed]});
