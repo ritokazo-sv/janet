@@ -81,7 +81,8 @@ module.exports = {
 
         const embed = new EmbedBuilder()
         .setColor(0x0099FF)
-        .setTitle('Janet imaginou...')
+        .setTitle('Imagem gerada')
+        .setDescription(`**${interaction.user.name}** imaginou: \n\n ${prompt}`)
         .setURL(responseGPT)
         .setImage(responseGPT)      
         .setFooter({ text: `Solicitado por ${interaction.user.globalName}`, iconURL: interaction.user.avatarURL() })
