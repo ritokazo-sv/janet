@@ -39,7 +39,7 @@ module.exports = {
             if(targetCategory == category) {
                 embed = new EmbedBuilder()
                 .setColor(0x0099FF)
-                .setTitle(`${category} Comandos`)
+                .setTitle(`[${category}] Comandos`)
                 .setDescription(`Essa é a lista de todos comandos **${category}** disponíveis no momento`)        
                 .setFooter({ text: `Solicitado por ${interaction.user.globalName}`, iconURL: interaction.user.avatarURL() })
                 .setTimestamp();

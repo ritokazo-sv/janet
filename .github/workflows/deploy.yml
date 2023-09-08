@@ -19,7 +19,7 @@ jobs:
             wget https://github.com/richarditokazo/janet/archive/refs/heads/main.zip
             unzip main.zip
             rm main.zip
-            cp .env janet-main/            
+            cp .env janet-main/v2/src            
             cd janet-main && npm install
             cd v2/src
             pm2 delete 0
