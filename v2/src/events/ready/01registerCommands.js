@@ -8,8 +8,6 @@ module.exports = async (client) => {
         const localCommands = getLocalCommands();
         const applicationCommands = await getApplicationCommands(client, testServer);
 
-        console.log(applicationCommands);
-
         for (appCommand of applicationCommands) {
             console.log(`Checking commands for "${appCommand.guild.name}"`);
 

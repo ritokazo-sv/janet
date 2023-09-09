@@ -143,6 +143,7 @@ module.exports = {
         // if dm is choosed
         if(user) {
             const response = new EmbedBuilder().setTitle('Encaminhado para DM');
+
             if(user.user.id !== interaction.user.id) {
                 response.setDescription(`Mensagem enviada para ${user.user.globalName}`);
             }
