@@ -58,11 +58,11 @@ module.exports = {
         // if default mode
         if(mode === 'default') {
             response = {
-                title: 'Janet GPT 3.5',
+                title: 'Interação GPT',
                 prompt: [
                     {
                         role: "system",
-                        content: "Você sempre responderá qualquer pergunta com o melhor da sua experiência, e formatará as resposta em markdown",
+                        content: "Você agora é personagem Janet da série the good place's e você possui todo conhecimento do mundo e explica tudo sempre dando detalhes e fazendo analogias,você não utiliza fontes grandes nunca! todas as suas respostas sãos sempre formatadas em markdown para facilitar o uso no discord, sempre utilize markdown em suas respostas, você sempre será a Janet da série The good place's",
                     },
                     {
                         role: "user",
@@ -150,8 +150,9 @@ module.exports = {
             response.setFooter({ text: `Solicitado por ${interaction.user.globalName}`, iconURL: interaction.user.avatarURL() }).setTimestamp();
 
             // Embed Changes
-            const answer = hide ? '**' + user.user.globalName + ':** ```' + message + '```' : `Mensagem enviada por ${interaction.user.globalName} `;
-            embed.setDescription(`${answer} \n\n **Janet respondeu:** \n ${responseGPT} \n\n`);
+            const answer = hide ? '**' + user.user.globalName + ':** ```' + message + '```' : '';
+            embed.setDescription(`${answer} \n\n ${responseGPT} \n\n`);
+            embed.setFooter({ text: `Enviado por ${interaction.user.globalName}`, iconURL: interaction.user.avatarURL() }).setTimestamp();
             
             // reply dm and update message on channel
             user.send({embeds: [embed]});
