@@ -19,7 +19,8 @@ jobs:
             wget https://github.com/richarditokazo/janet/archive/refs/heads/main.zip
             unzip main.zip
             rm main.zip
-            cp .env janet-main/v2/src      
+            cp .env janet-main/v2/src   
+            nvm install 16   
             nvm use 16      
             cd janet-main && npm install
             cd v2/src
