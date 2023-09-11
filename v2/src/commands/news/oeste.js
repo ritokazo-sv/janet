@@ -40,7 +40,6 @@ module.exports = {
         if(lastnews.data) {            
             for(const lastnew of lastnews.data) {
                 let embed   = new EmbedBuilder();
-
                 let details = await getNews(lastnew.id);
 
                 // Details
