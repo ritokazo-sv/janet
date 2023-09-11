@@ -15,7 +15,7 @@ module.exports = async (client, interaction) => {
         if(commandObject.devOnly) {
             if(!devs.includes(interaction.member.id)) {
                 interaction.reply({
-                    content: 'Only developers are allowed to use this command.',
+                    content: 'Esse comando é restrito, e só pode ser utilizado com autorização.',
                     ephemeral: true,
                 });
 
@@ -27,7 +27,7 @@ module.exports = async (client, interaction) => {
         if(commandObject.testOnly) {
             if(!interaction.guild.id === testServer) {
                 interaction.reply({
-                    content: 'This command cannot be ran here.',
+                    content: 'Esse comando não pode ser utilizado nesse servidor.',
                     ephemeral: true,
                 });
 
@@ -39,7 +39,7 @@ module.exports = async (client, interaction) => {
             for (const permission of commandObject.permissionsRequired) {
                 if (!interaction.member.permissions.has(permission)) {
                     interaction.reply({
-                        content: 'Not enough permissions.',
+                        content: 'Sem permissões de servidor suficientes.',
                         ephemeral: true,
                     });
                     return;
@@ -53,7 +53,7 @@ module.exports = async (client, interaction) => {
         
                 if (!bot.permissions.has(permission)) {
                     interaction.reply({
-                        content: "I don't have enough permissions.",
+                        content: "Eu, Janet, não consigo fazer isso por falta de permissões do servidor.",
                         ephemeral: true,
                     });
                     return;
@@ -64,6 +64,6 @@ module.exports = async (client, interaction) => {
         await commandObject.callback(client, interaction);
 
     } catch (error) {
-        console.error(`There was a error running this command: ${error}`);
+        console.error(`Ocorreu um erro executando o comando: ${error}`);
     }
 };
