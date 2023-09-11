@@ -45,7 +45,7 @@ module.exports = {
                 .setTimestamp();
                 
                 for (const command of groupedCommands[category]) {
-                    embed.addFields({ name: command.name, value: command.description, inline: false });
+                    embed.addFields({ name: '/' + command.name, value: command.description, inline: false });
                 }
             }
         }
