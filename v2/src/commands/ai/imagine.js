@@ -5,7 +5,7 @@ module.exports = {
     name: 'imagine',
     category: 'AI',
     description: 'Gera uma imagem utilizando DALL-E',
-    testServer: true,
+    testOnly: true,
     options: [
         {
             name: 'size',

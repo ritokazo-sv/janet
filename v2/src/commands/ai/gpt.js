@@ -5,7 +5,7 @@ module.exports = {
     name: 'gpt',
     category: 'AI',
     description: 'Chat GPT 3.5 já com prompts pré escritos',
-    testServer: true,
+    testOnly: true,
     options: [
         {
             name: 'mode',
