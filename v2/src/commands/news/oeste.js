@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios');
 const { EmbedBuilder } = require('discord.js');
 const getHex = require('../../utils/getHex');
 
@@ -35,6 +35,7 @@ module.exports = {
         }
 
         const lastnews = await getNews();
+        console.log(lastnews);
         let embeds = [];
 
         if(lastnews.data) {            
