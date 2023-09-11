@@ -47,7 +47,7 @@ module.exports = {
                 if(details.data) {
                     let stripped = details.data[0].content.replace(/<\/?[^>]+(>|$)/g, "").replace(/&#[0-9]+;/g, '').replace(/\n\s*\n/g, '\n').trim();
                     let content = stripped.length > 200 ? stripped.substr(0, 200) + '...' : stripped;
-                    embed.setDescription(content)   
+                    embed.setDescription(content)
                 }
 
                 // public date
