@@ -39,7 +39,6 @@ module.exports = {
         async function getNews(limit = 1) {
              // Api endpoint
             const API_ENDPOINT = 'https://studiovisual.com.br/wp-json/wp/v2/posts/?per_page=' + limit;
-            console.log(API_ENDPOINT);
 
             var options = {
                 method: 'GET',
